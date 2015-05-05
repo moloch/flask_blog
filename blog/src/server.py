@@ -22,9 +22,11 @@ def delete():
     db.session.commit()
     return "dario deleted"
 
-@app.route("/login")
+@app.route("/login", methods=['GET','POST'])
 def login():
     form = LoginForm()
+    if form.validate():
+        print("HELLO")
     return render_template("login_form.html", form=form)
 
 def create_app(database_uri, debug=False):

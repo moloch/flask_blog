@@ -1,11 +1,13 @@
 __author__ = 'Dario Coco'
 
-from wtforms import Form, BooleanField, StringField, PasswordField, validators
+from wtforms import Form, BooleanField, StringField, PasswordField,\
+    SubmitField, validators
 
 
 class LoginForm(Form):
     username = StringField('Username', [validators.Length(min=4, max=25)])
     password = PasswordField('Password')
+    submit = SubmitField('Submit')
 
 
 class RegistrationForm(Form):
