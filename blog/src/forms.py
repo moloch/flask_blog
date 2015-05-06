@@ -1,6 +1,7 @@
 __author__ = 'Dario Coco'
 
-from wtforms import Form, BooleanField, StringField, PasswordField,\
+from flask_wtf import Form
+from wtforms import BooleanField, StringField, PasswordField,\
     SubmitField, validators
 
 
