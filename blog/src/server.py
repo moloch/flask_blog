@@ -33,9 +33,13 @@ def login():
     form = LoginForm(csrf_enabled=False)
     if form.validate_on_submit():
         username = form.username.data
+        password = form.password.data
         user = User.query.filter(User.username == username).first()
-        login_user(user)
-        return 'HELLO'
+        if user.check_password(password):
+            login_user(user)
+            return 'Logged in'
+        else:
+            return 'Wrong password'
     return render_template("login_form.html", form=form)
 
 @app.route("/logout")
@@ -53,7 +57,7 @@ def load_user(userid):
     return User.query.get(int(userid))
 
 if __name__ == '__main__':
-    app = create_app(DATABASE_URI, debug=False)
+    app = create_app(DATABASE_URI, debug=True)
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
     app.secret_key ='123'
     db.init_app(app)
