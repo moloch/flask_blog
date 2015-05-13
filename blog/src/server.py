@@ -4,11 +4,11 @@ __author__ = 'Dario Coco'
 from sqlalchemy import create_engine
 from blog.src.models import User
 from blog.src.config import DATABASE_URI
-from blog import app, db, login_manager
+from blog import app, db, manager, login_manager
 from flask_login import login_user, logout_user, login_required
 from blog.src.forms import LoginForm
 from flask import render_template, redirect
-
+from flask_migrate import MigrateCommand
 
 @app.route("/create")
 def hello():
@@ -63,6 +63,7 @@ if __name__ == '__main__':
     db.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = 'login'
-    app.run()
+    manager.add_command('db', MigrateCommand)
+    manager.run()
 
 
