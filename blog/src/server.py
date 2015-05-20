@@ -56,7 +56,7 @@ def create_app(database_uri, debug=False):
 def load_user(userid):
     return User.query.get(int(userid))
 
-if __name__ == '__main__':
+def main():
     app = create_app(DATABASE_URI, debug=True)
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
     app.secret_key ='123'
@@ -65,5 +65,8 @@ if __name__ == '__main__':
     login_manager.login_view = 'login'
     manager.add_command('db', MigrateCommand)
     manager.run()
+
+if __name__ == '__main__':
+    main()
 
 
